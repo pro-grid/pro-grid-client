@@ -23,9 +23,21 @@
     "gulp-useref": "^0.4.2",
     "jshint-stylish": "^0.2.0",
     "opn": "^0.1.1",
-    "wiredep": "^1.4.3"
+    "wiredep": "^1.4.3",
+    "coveralls": "~2.10.0",
+    "istanbul": "~0.2.4",
+    "jshint-stylish": "~0.2.0",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "load-grunt-tasks": "~0.4.0",
+    "mocha": "~1.20.0",
+    "mocha-lcov-reporter": "0.0.1"
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec test/spec/server && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   }
 }
