@@ -1,4 +1,4 @@
-pro-grid-client
+progrid.io client
 ===
 [progrid.io][] is a live multiplayer pixel art game.
 
