@@ -4,3 +4,5 @@ dist
 .sass-cache
 app/bower_components
 test/bower_components
+app/scripts/config.js
+s3_website.yml

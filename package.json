@@ -5,6 +5,7 @@
   "devDependencies": {
     "connect": "^2.14.4",
     "connect-livereload": "^0.4.0",
+    "coveralls": "~2.10.0",
     "gulp": "^3.6.0",
     "gulp-autoprefixer": "^0.0.7",
     "gulp-bower-files": "^0.2.1",
@@ -17,21 +18,22 @@
     "gulp-jshint": "^1.5.3",
     "gulp-livereload": "^1.2.0",
     "gulp-load-plugins": "^0.5.0",
+    "gulp-ng-constant": "^0.1.0",
+    "gulp-rename": "^1.2.0",
     "gulp-ruby-sass": "^0.4.3",
     "gulp-size": "^0.3.0",
     "gulp-uglify": "^0.2.1",
     "gulp-useref": "^0.4.2",
-    "jshint-stylish": "^0.2.0",
-    "opn": "^0.1.1",
-    "wiredep": "^1.4.3",
-    "coveralls": "~2.10.0",
     "istanbul": "~0.2.4",
     "jshint-stylish": "~0.2.0",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4",
     "load-grunt-tasks": "~0.4.0",
+    "lodash": "^2.4.1",
     "mocha": "~1.20.0",
-    "mocha-lcov-reporter": "0.0.1"
+    "mocha-lcov-reporter": "0.0.1",
+    "opn": "^0.1.1",
+    "wiredep": "^1.4.3"
   },
   "engines": {
     "node": ">=0.10.0"

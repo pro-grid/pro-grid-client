@@ -2,9 +2,23 @@
 // generated on 2014-06-14 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
+var _ = require('lodash');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
+
+var environment = process.env.GULP_ENV || 'development';
+
+gulp.task('config', function () {
+    var configFile = require('./config/'+environment+'.json'); 
+    return gulp.src('config/default.json')
+      .pipe($.ngConstant({
+        name: 'proGridApp.config',
+        constants: configFile
+      }))
+      .pipe($.rename('config.js'))
+      .pipe(gulp.dest('app/scripts'));
+});
 
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
@@ -24,14 +38,21 @@ gulp.task('scripts', function () {
         .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts'], function () {
+gulp.task('views', function () {
+  return gulp.src('app/views/**/*.html')
+    .pipe(gulp.dest('dist/views'));
+});
+
+gulp.task('html', ['styles', 'scripts', 'views'], function () {
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
 
     return gulp.src('app/*.html')
         .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
         .pipe(jsFilter)
-        .pipe($.uglify())
+        .pipe($.uglify({
+          mangle: false
+        }))
         .pipe(jsFilter.restore())
         .pipe(cssFilter)
         .pipe($.csso())
