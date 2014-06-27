@@ -2,6 +2,9 @@ progrid.io client
 ===
 [progrid.io][] is a live multiplayer pixel art game.
 
+[![code climate badge][]] [code climate]
+[![david badge][]][david]
+
 ![progrid.io][progrid gif]
 
 [progrid.io][] is made up of two modules. [pro-grid][], a [node][]/[socket.io][] server
@@ -112,6 +115,10 @@ If you are a fan of the grid (and have had the resolve to read this far) you
 would probably enjoy [pro-grid-utils][], a collection of fun hacks you can run
 in your console.
 
+[code climate]: https://codeclimate.com/github/pro-grid/pro-grid-client
+[code climate badge]: http://img.shields.io/codeclimate/github/pro-grid/pro-grid-client.svg?style=flat
+[david]: https://david-dm.org/pro-grid/pro-grid-client#info=devDependencies
+[david badge]: http://img.shields.io/david/dev/pro-grid/pro-grid-client.svg?style=flat
 [progrid gif]: http://i.imgur.com/GiLvpX3.gif
 [progrid.io]: http://www.progrid.io "progrid.io"
 [pro-grid]: http://github.com/pro-grid/pro-grid
