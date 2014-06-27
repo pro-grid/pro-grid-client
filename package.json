@@ -1,6 +1,6 @@
 {
   "name": "pro-grid-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {},
   "devDependencies": {
     "connect": "^2.14.4",

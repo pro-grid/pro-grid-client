@@ -1,7 +1,7 @@
 {
   "name": "pro-grid-client",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "modernizr": "~2.6.2",
     "angular": "1.2.10",

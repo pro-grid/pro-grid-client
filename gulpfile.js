@@ -164,6 +164,6 @@ gulp.task('bump', function(){
 
 gulp.task('patch', function(){
   gulp.src(packages)
-  .pipe($.bump({type:'minor'}))
+  .pipe($.bump({type:'patch'}))
   .pipe(gulp.dest('./'));
 });
