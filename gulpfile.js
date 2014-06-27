@@ -9,6 +9,8 @@ var $ = require('gulp-load-plugins')();
 
 var environment = process.env.GULP_ENV || 'development';
 
+var packages = ['./bower.json', './package.json'];
+
 gulp.task('config', function () {
     var configFile = require('./config/'+environment+'.json'); 
     return gulp.src('config/default.json')
@@ -151,4 +153,17 @@ gulp.task('watch', ['connect', 'serve'], function () {
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('bower.json', ['wiredep']);
+});
+
+
+gulp.task('bump', function(){
+  gulp.src(packages)
+  .pipe($.bump({type:'minor'}))
+  .pipe(gulp.dest('./'));
+});
+
+gulp.task('patch', function(){
+  gulp.src(packages)
+  .pipe($.bump({type:'minor'}))
+  .pipe(gulp.dest('./'));
 });

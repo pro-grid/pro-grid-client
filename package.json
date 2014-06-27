@@ -1,6 +1,6 @@
 {
   "name": "pro-grid-client",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
     "connect": "^2.14.4",
@@ -9,6 +9,7 @@
     "gulp": "^3.6.0",
     "gulp-autoprefixer": "^0.0.7",
     "gulp-bower-files": "^0.2.1",
+    "gulp-bump": "^0.1.10",
     "gulp-cache": "^0.1.1",
     "gulp-clean": "^0.2.4",
     "gulp-csso": "^0.2.6",

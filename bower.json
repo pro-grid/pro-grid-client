@@ -1,6 +1,7 @@
 {
   "name": "pro-grid-client",
   "private": true,
+  "version": "1.0.0",
   "dependencies": {
     "modernizr": "~2.6.2",
     "angular": "1.2.10",
@@ -21,7 +22,7 @@
   },
   "overrides": {
     "socket.io-client": {
-      "main": "socket.io.js" 
+      "main": "socket.io.js"
     }
   }
 }
