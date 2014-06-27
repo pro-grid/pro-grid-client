@@ -2,17 +2,22 @@
 // generated on 2014-06-14 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
-var _ = require('lodash');
 
 // load plugins
-var $ = require('gulp-load-plugins')();
+var $ = require('gulp-load-plugins')() || {};
 
 var environment = process.env.GULP_ENV || 'development';
 
 var packages = ['./bower.json', './package.json'];
 
+var bump = function (type) {
+  gulp.src(packages)
+    .pipe($.bump({type: type}))
+    .pipe(gulp.dest('./'));
+};
+
 gulp.task('config', function () {
-    var configFile = require('./config/'+environment+'.json'); 
+    var configFile = require('./config/'+environment+'.json');
     return gulp.src('config/default.json')
       .pipe($.ngConstant({
         name: 'proGridApp.config',
@@ -157,13 +162,9 @@ gulp.task('watch', ['connect', 'serve'], function () {
 
 
 gulp.task('bump', function(){
-  gulp.src(packages)
-  .pipe($.bump({type:'minor'}))
-  .pipe(gulp.dest('./'));
+  bump('minor');
 });
 
 gulp.task('patch', function(){
-  gulp.src(packages)
-  .pipe($.bump({type:'patch'}))
-  .pipe(gulp.dest('./'));
+  bump('patch');
 });
