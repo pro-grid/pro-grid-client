@@ -1,0 +1,50 @@
+$height: 150px;
+$width: 150px;
+$border-width: 4px;
+$overlay-color: #ccc;
+$base-color: #555;
+
+.loading {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+}
+.loading:before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: $overlay-color;
+  opacity: 0.6;
+}
+.loading:after {
+  z-index: 2;
+  content: "";
+  height: $height;
+  width: $width;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: (-$width / 2) 0 0 (-$width / 2);
+  transition: all .75s ease 0s;
+  border-radius: 100%;
+  border-top: $border-width solid $base-color;
+  animation: standard .75s infinite linear;
+}
+.loading.no-overlay:before {
+  content: none;
+  display: none;
+}
+
+@keyframes standard {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

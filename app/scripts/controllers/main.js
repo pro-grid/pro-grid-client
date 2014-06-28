@@ -1,29 +1,24 @@
 'use strict';
 
 angular.module('proGridApp')
-  .controller('MainCtrl', ['$scope', 'Randomcolor', 'hostname', 'setGridDimensions', function ($scope, Randomcolor, hostname, setGridDimensions) {
+  .controller('MainCtrl', ['$scope', 'Randomcolor', 'hostname', 'injectStyle', function ($scope, Randomcolor, hostname, injectStyle) {
     var socket = io.connect(hostname);
     // Socket listener for updating grid
     var userColor = Randomcolor.new();
     var apiKey = 1;
     var updateGrid = function(row, col, color) {
-      var selector = '.col_' + row + '_' + col;
-      var el = document.querySelector(selector);
-      if(el.style.backgroundColor) {
-        el.style.backgroundColor = '';
-      } else {
-        el.style.backgroundColor = color;
-      }
+      $scope.gridArray[row][col].color = !!$scope.gridArray[row][col].color ? '' : userColor;
     };
+
     socket.on('server ready', function (data) {
       //grid is an array
-      console.log('Hello There! Hope you are enjoying the app. Please be nice! Please help us fix our issues over at: https://github.com/pro-grid/pro-grid Thank you. -progrid.io');
-      setGridDimensions.style(data.gridArray.length);
-      data.gridArray.forEach(function (element) {
-        element.forEach(function (element) {
-          updateGrid(element.row, element.col, element.color);
-        });
-      });
+      var message = 'Hello There! Hope you are enjoying the app. Please be '+
+      'nice! Please help us fix our issues over at: '+
+      'https://github.com/pro-grid/pro-grid Thank you. -progrid.io';
+      console.log(message);
+      injectStyle.gridDimensions(data.gridArray.length);
+      $scope.gridArray = angular.copy(data.gridArray);
+      $scope.$apply();
     });
 
     socket.on('fresh api key', function (data) {
@@ -44,12 +39,6 @@ angular.module('proGridApp')
       console.log('goodbye');
     });
 
-    $scope.dimensions = 32;
-
-    $scope.generateGrid = function(num) {
-      return new Array(num);
-    };
-
     $scope.gridClicked = function(row, col) {
       updateGrid(row, col, userColor);
       socket.emit('clicked', { row: row, col: col, color: userColor, apiKey: apiKey });
@@ -58,7 +47,7 @@ angular.module('proGridApp')
     $scope.gridRightClicked = function(row, col) {
       var selector = '.col_' + row + '_' + col;
       var el = document.querySelector(selector);
-      userColor = colorToHex(el.style.backgroundColor);
+      userColor = el.style.backgroundColor;
     };
 
     $scope.closeMessage = function() {
@@ -69,27 +58,13 @@ angular.module('proGridApp')
 
 angular.module('proGridApp')
   .directive('ngRightClick', function($parse) {
-      return function(scope, element, attrs) {
-          var fn = $parse(attrs.ngRightClick);
-          element.bind('contextmenu', function(event) {
-              scope.$apply(function() {
-                  event.preventDefault();
-                  fn(scope, {$event:event});
-                });
-            });
-        };
-    });
-
-function colorToHex(color) {
-  if (color.substr(0, 1) === '#') {
-    return color;
-  }
-  var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
-
-  var red = parseInt(digits[2]);
-  var green = parseInt(digits[3]);
-  var blue = parseInt(digits[4]);
-
-  var rgb = blue | (green << 8) | (red << 16);
-  return digits[1] + '#' + rgb.toString(16);
-}
+    return function(scope, element, attrs) {
+      var fn = $parse(attrs.ngRightClick);
+      element.bind('contextmenu', function(event) {
+        scope.$apply(function() {
+          event.preventDefault();
+          fn(scope, {$event:event});
+        });
+      });
+    };
+  });
