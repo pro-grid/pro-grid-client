@@ -15,6 +15,7 @@ angular.module('proGridApp')
         el.style.backgroundColor = color;
       }
     };
+
     socket.on('server ready', function (data) {
       //grid is an array
       console.log('Hello There! Hope you are enjoying the app. Please be nice! Please help us fix our issues over at: https://github.com/pro-grid/pro-grid Thank you. -progrid.io');
@@ -57,7 +58,7 @@ angular.module('proGridApp')
     $scope.gridRightClicked = function(row, col) {
       var selector = '.col_' + row + '_' + col;
       var el = document.querySelector(selector);
-      userColor = colorToHex(el.style.backgroundColor);
+      userColor = el.style.backgroundColor;
     };
 
     $scope.closeMessage = function() {
@@ -68,27 +69,14 @@ angular.module('proGridApp')
 
 angular.module('proGridApp')
   .directive('ngRightClick', function($parse) {
-      return function(scope, element, attrs) {
-          var fn = $parse(attrs.ngRightClick);
-          element.bind('contextmenu', function(event) {
-              scope.$apply(function() {
-                  event.preventDefault();
-                  fn(scope, {$event:event});
-                });
-            });
-        };
-    });
+    return function(scope, element, attrs) {
+      var fn = $parse(attrs.ngRightClick);
+      element.bind('contextmenu', function(event) {
+        scope.$apply(function() {
+          event.preventDefault();
+          fn(scope, {$event:event});
+        });
+      });
+    };
+  });
 
-function colorToHex(color) {
-  if (color.substr(0, 1) === '#') {
-    return color;
-  }
-  var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
-
-  var red = parseInt(digits[2]);
-  var green = parseInt(digits[3]);
-  var blue = parseInt(digits[4]);
-
-  var rgb = blue | (green << 8) | (red << 16);
-  return digits[1] + '#' + rgb.toString(16);
-}
