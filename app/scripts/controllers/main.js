@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('proGridApp')
-  .controller('MainCtrl', ['$scope', 'hostname', 'injectStyle', function ($scope, hostname, injectStyle) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'hostname', 'injectStyle', function ($scope, $timeout, hostname, injectStyle) {
     var socket = io.connect(hostname);
     // Socket listener for updating grid
     var userColor = '';
     var apiKey = 1;
     var updateGrid = function(row, col, color) {
-      $scope.gridArray[row][col].color = !!$scope.gridArray[row][col].color ? '' : color;
-      $scope.$apply();
+      $timeout(function () {
+        $scope.gridArray[row][col].color = !!$scope.gridArray[row][col].color ? '' : color;
+      }, 0);
     };
 
     socket.on('server ready', function (data) {
@@ -19,8 +20,9 @@ angular.module('proGridApp')
       console.log(message);
       userColor = data.userColor;
       injectStyle.gridDimensions(data.gridArray.length);
-      $scope.gridArray = angular.copy(data.gridArray);
-      $scope.$apply();
+      $timeout(function () {
+        $scope.gridArray = angular.copy(data.gridArray);
+      }, 0);
     });
 
     socket.on('fresh api key', function (data) {
