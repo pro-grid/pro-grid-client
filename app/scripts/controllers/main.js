@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('proGridApp')
-  .controller('MainCtrl', ['$scope', 'Randomcolor', 'hostname', 'injectStyle', function ($scope, Randomcolor, hostname, injectStyle) {
+  .controller('MainCtrl', ['$scope', 'hostname', 'injectStyle', function ($scope, hostname, injectStyle) {
     var socket = io.connect(hostname);
     // Socket listener for updating grid
-    var userColor = Randomcolor.new();
+    var userColor = '';
     var apiKey = 1;
     var updateGrid = function(row, col, color) {
       $scope.gridArray[row][col].color = !!$scope.gridArray[row][col].color ? '' : color;
@@ -17,6 +17,7 @@ angular.module('proGridApp')
       'nice! Please help us fix our issues over at: '+
       'https://github.com/pro-grid/pro-grid Thank you. -progrid.io';
       console.log(message);
+      userColor = data.userColor;
       injectStyle.gridDimensions(data.gridArray.length);
       $scope.gridArray = angular.copy(data.gridArray);
       $scope.$apply();
