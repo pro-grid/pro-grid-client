@@ -7,7 +7,8 @@ angular.module('proGridApp')
     var userColor = Randomcolor.new();
     var apiKey = 1;
     var updateGrid = function(row, col, color) {
-      $scope.gridArray[row][col].color = !!$scope.gridArray[row][col].color ? '' : userColor;
+      $scope.gridArray[row][col].color = !!$scope.gridArray[row][col].color ? '' : color;
+      $scope.$apply();
     };
 
     socket.on('server ready', function (data) {
