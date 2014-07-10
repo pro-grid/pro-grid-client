@@ -4,6 +4,7 @@ progrid.io client
 
 [![code climate badge][]] [code climate]
 [![david badge][]][david]
+[![Gitter chat][gitter badge]][gitter]
 
 ![progrid.io][progrid gif]
 
@@ -119,6 +120,8 @@ in your console.
 [code climate badge]: http://img.shields.io/codeclimate/github/pro-grid/pro-grid-client.svg?style=flat
 [david]: https://david-dm.org/pro-grid/pro-grid-client#info=devDependencies
 [david badge]: http://img.shields.io/david/dev/pro-grid/pro-grid-client.svg?style=flat
+[gitter]: https://gitter.im/pro-grid
+[gitter badge]: http://img.shields.io/badge/GITTER-progrid-green.svg?style=flat
 [progrid gif]: http://i.imgur.com/GiLvpX3.gif
 [progrid.io]: http://www.progrid.io "progrid.io"
 [pro-grid]: http://github.com/pro-grid/pro-grid
