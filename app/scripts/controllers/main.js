@@ -40,6 +40,10 @@ angular.module('proGridApp')
         {
           'name': 'circles',
           'className': 'mod-circle'
+        },
+        {
+          'name': 'flip',
+          'className': 'mod-flip'
         }
 
 
