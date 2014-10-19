@@ -1,0 +1,16 @@
+%button {
+  &, &:link, &:visited {
+    transition: 0.2s all;
+    background: $button-bg;
+    text-decoration: none;
+    padding: 0.5em 0.8em;
+    color: #fff;
+  }
+  &:hover {
+    background: saturate($button-bg, 20%);
+  }
+}
+
+.button {
+  @extend %button;
+}

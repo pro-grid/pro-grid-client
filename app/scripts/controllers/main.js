@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('proGridApp')
-  .controller('MainCtrl', ['$scope', '$timeout', 'hostname', 'injectStyle', function ($scope, $timeout, hostname, injectStyle) {
+  .controller('MainCtrl', [
+    '$scope', '$timeout', '$document', 'hostname', 'injectStyle', 
+    function ($scope, $timeout, $document, hostname, injectStyle) {
     var socket = io.connect(hostname);
     // Socket listener for updating grid
     $scope.userColor = '';

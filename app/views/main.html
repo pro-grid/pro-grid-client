@@ -1,7 +1,7 @@
 <div class="loading" ng-if="!gridArray">
 </div>
 <div class="ui" ng-hide="uiClose">
-  <button class="ui-close" ng-click="uiClose = true">&times;</button>
+  <a href="#grid" class="ui-close" role="button" du-smooth-scroll>&times;</a>
   <div class="ui-viewport">
     <div class="ui-main">
       <div class="ui-prose">
@@ -9,6 +9,7 @@
         <p>ProGrid is a live multiplayer pixel art game. Everything you draw is
         broadcasted live to the other users on the site. Everything you draw is
         saved forever...well until someone erases it.</p>
+        <p><a href="#grid" role="button" class="button" du-smooth-scroll>Start Clicking</a></p>
       </div>
     </div>
     <div class="ui-widgets">
