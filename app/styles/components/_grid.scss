@@ -6,16 +6,26 @@ $grid-col-text: lighten($grid-col-bg, 10%);
 html, body {
   box-sizing: border-box;
   height: 100%;
+  background: #1d1d1d;
 }
 
 .container {
   height: 100%;
 }
 
-.g {
+.g-container {
+  width: 100%;
   position: relative;
-  width:100%;
-  height: 100%;
+  &:after {
+    padding-top: 100%; // 16:9 ratio
+    display: block;
+    content: '';
+  }
+}
+
+.g {
+  position: absolute;
+  top: 0; bottom: 0; right: 0; left: 0;
   background: $grid-bg;
 }
 

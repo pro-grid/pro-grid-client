@@ -147,6 +147,7 @@ $ui-padding: 2%;
   .ui-viewport {
     @include clearfix;
     transition: 0.1s all;
+    padding-top: 2em;
     .ng-reveal & {
       filter: blur(10px);
       transform: scale(0.9);
@@ -169,10 +170,19 @@ $ui-padding: 2%;
     transition: 0.2s all;
     background-color: darken($ui-accent, 10%);
     position: absolute;
-
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
   }
+}
+
+.ui-mod-list {
+  list-style: none;
+  font-size: 1.5em;
+  li {
+    margin-bottom: 0.4em;
+  }
+  
+
 }

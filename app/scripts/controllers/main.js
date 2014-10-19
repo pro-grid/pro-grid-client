@@ -14,6 +14,56 @@ angular.module('proGridApp')
     $scope.meta = {
       numUsers: 0
     };
+    $scope.modCss = {};
+    $scope.mods = {
+      'css': [
+        {
+          'name': 'invert',
+          'filter': 'invert(100%)'
+        },
+        {
+          'name': 'blur',
+          'filter': 'blur(15px)'
+        },
+        {
+          'name': 'sepia',
+          'filter': 'sepia(100%)'
+        },
+        {
+          'name': 'grayscale',
+          'filter': 'grayscale(100%)'
+        },
+        {
+          'name': 'drunk',
+          'className': 'mod-drunk'
+        },
+        {
+          'name': 'circles',
+          'className': 'mod-circle'
+        },
+        {
+          'name': 'flip',
+          'className': 'mod-flip'
+        }
+      ]
+    };
+    $scope.toggleCssMod = function () {
+      var cssFilters = [];
+      var cssClasses = [];
+      _.each($scope.mods.css, function (e) {
+        if(e.enabled) {
+          if(e.filter) {
+            cssFilters.push(e.filter);
+          }
+          if(e.className) {
+            cssClasses.push(e.className);
+          }
+        }
+      });
+
+      $scope.modFilterCss = 'filter:'+cssFilters.join(' ')+';-webkit-filter:'+cssFilters.join(' ')+';';
+      $scope.modClasses = cssClasses.join(' ');
+    };
     var apiKey = 1;
     var updateGrid = function(row, col, color) {
       $timeout(function () {

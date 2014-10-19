@@ -1,13 +1,15 @@
 <div class="loading" ng-if="!gridArray">
 </div>
 <pg-dashboard></pg-dashboard>
-<div class="g" id="grid" ng-if="gridArray">
-  <div class="g__row" ng-repeat="row in gridArray track by $index">
-    <div  class="g__col col_{{ $parent.$index }}_{{ $index }}" 
-          ng-style="{'background-color': col.color }"
-          ng-repeat="col in row track by $index" 
-          ng-click="gridClicked($parent.$index, $index)" 
-          ng-right-click="gridRightClicked($parent.$index, $index)">
+<div class="g-container" ng-if="gridArray">
+  <div class="g {{ modClasses }}" id="grid" style="{{ modFilterCss }}">
+    <div class="g__row" ng-repeat="row in gridArray track by $index">
+      <div  class="g__col col_{{ $parent.$index }}_{{ $index }}" 
+            ng-style="{'background-color': col.color }"
+            ng-repeat="col in row track by $index" 
+            ng-click="gridClicked($parent.$index, $index)" 
+            ng-right-click="gridRightClicked($parent.$index, $index)">
+      </div>
     </div>
   </div>
 </div>
