@@ -45,8 +45,6 @@ angular.module('proGridApp')
           'name': 'flip',
           'className': 'mod-flip'
         }
-
-
       ]
     };
     $scope.toggleCssMod = function () {
