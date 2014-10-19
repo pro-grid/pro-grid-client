@@ -4,7 +4,15 @@ angular.module('proGridApp')
   .controller('MainCtrl', ['$scope', '$timeout', 'hostname', 'injectStyle', function ($scope, $timeout, hostname, injectStyle) {
     var socket = io.connect(hostname);
     // Socket listener for updating grid
-    var userColor = '';
+    $scope.userColor = '';
+    $scope.user = {
+      color: '',
+      name: 'anon'
+    };
+    $scope.meta = {
+      numUsers: 0
+    };
+
     var apiKey = 1;
     var updateGrid = function(row, col, color) {
       $timeout(function () {
@@ -18,7 +26,7 @@ angular.module('proGridApp')
       'nice! Please help us fix our issues over at: '+
       'https://github.com/pro-grid/pro-grid Thank you. -progrid.io';
       console.log(message);
-      userColor = data.userColor;
+      $scope.user.color = data.userColor;
       injectStyle.gridDimensions(data.gridArray.length);
       $timeout(function () {
         $scope.gridArray = angular.copy(data.gridArray);
@@ -27,6 +35,12 @@ angular.module('proGridApp')
 
     socket.on('fresh api key', function (data) {
       apiKey = data.apiKey;
+    });
+
+    socket.on('join', function (data) {
+      $scope.meta.numUsers = data;
+      $scope.$apply();
+      console.log(data);
     });
 
     socket.on('update', function (data) {
@@ -44,20 +58,21 @@ angular.module('proGridApp')
     });
 
     $scope.gridClicked = function(row, col) {
-      updateGrid(row, col, userColor);
-      socket.emit('clicked', { row: row, col: col, color: userColor, apiKey: apiKey });
+      updateGrid(row, col, $scope.user.color);
+      socket.emit('clicked', { row: row, col: col, color: $scope.user.color, apiKey: apiKey });
     };
 
     $scope.gridRightClicked = function(row, col) {
       var selector = '.col_' + row + '_' + col;
       var el = document.querySelector(selector);
-      userColor = el.style.backgroundColor;
+      $scope.user.color = el.style.backgroundColor;
     };
 
     $scope.closeMessage = function() {
       $scope.message = false;
     };
     $scope.gridClicked = _.throttle($scope.gridClicked, 100, {trailing: false});
+
   }]);
 
 angular.module('proGridApp')
