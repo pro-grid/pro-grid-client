@@ -46,6 +46,15 @@ angular.module('proGridApp')
     socket.on('update', function (data) {
       updateGrid(data.row, data.col, data.color);
     });
+
+    socket.on('color changed', function(data) {
+      console.log('refreshing color');
+      console.log($scope.user.color);
+      console.log(data.userColor);
+      $scope.user.color = data.userColor;
+      $scope.$apply();
+    });
+
     socket.on('connect', function () {
       $scope.message = false;
     });
@@ -70,6 +79,11 @@ angular.module('proGridApp')
 
     $scope.closeMessage = function() {
       $scope.message = false;
+    };
+
+    $scope.refreshColor = function() {
+      socket.emit('refresh color');
+      console.log('requesting color refresh');
     };
     $scope.gridClicked = _.throttle($scope.gridClicked, 100, {trailing: false});
 
