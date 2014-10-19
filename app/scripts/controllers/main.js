@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('proGridApp')
-  .controller('MainCtrl', ['$scope', '$timeout', 'hostname', 'injectStyle', function ($scope, $timeout, hostname, injectStyle) {
+  .controller('MainCtrl', [
+    '$scope', '$timeout', '$document', 'hostname', 'injectStyle', 
+    function ($scope, $timeout, $document, hostname, injectStyle) {
     var socket = io.connect(hostname);
     // Socket listener for updating grid
     $scope.userColor = '';
@@ -12,7 +14,6 @@ angular.module('proGridApp')
     $scope.meta = {
       numUsers: 0
     };
-
     var apiKey = 1;
     var updateGrid = function(row, col, color) {
       $timeout(function () {
@@ -40,7 +41,6 @@ angular.module('proGridApp')
     socket.on('join', function (data) {
       $scope.meta.numUsers = data;
       $scope.$apply();
-      console.log(data);
     });
 
     socket.on('update', function (data) {

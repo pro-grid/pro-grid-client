@@ -6,9 +6,10 @@ angular.module('proGridApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngTouch'
+  'ngTouch',
+  'duScroll'
 ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -17,4 +18,4 @@ angular.module('proGridApp', [
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }]);

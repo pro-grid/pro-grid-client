@@ -1,10 +1,9 @@
 // Main style file
 
-// Bourbon && Neat
-
 // Main app
-
+@import "partials/utils";
 @import "components/colors";
+@import "components/interface";
 @import "components/grid";
 @import "components/message";
 @import "components/loading";
