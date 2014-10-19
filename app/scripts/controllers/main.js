@@ -67,6 +67,29 @@ angular.module('proGridApp')
       var el = document.querySelector(selector);
       $scope.user.color = el.style.backgroundColor;
     };
+    
+    $scope.heatMod = function() {
+      var list = [];
+      for(var a = 0; a < data.gridArray.length; a++) {
+        for(var b = 0; b < data.gridArray.length; b++) {
+          var clicks = Math.random(100);
+          var maxclicks = 100;
+          var hex = Math.floor(255*clicks/maxclicks).toString(16);
+          var heat = "#" + hex + "0000";
+          list.push({"row": a,"col": b,"color": heat});
+        }
+      }
+      for(var c = 0; c < list.length-1; c++)
+        updateGrid(list[c].row, list[c].col, list[c].color);
+    };
+
+    $scope.modOff = function() {
+      for(var a = 0; a < data.gridArray.length; a++) {
+        for(var b = 0; b < data.gridArray.length; b++) {
+          updateGrid(b, a, $scope.gridArray[b][a].color);
+        }
+      }
+    };
 
     $scope.closeMessage = function() {
       $scope.message = false;
