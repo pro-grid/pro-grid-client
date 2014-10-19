@@ -1,0 +1,20 @@
+.mod-drunk {
+  filter: blur(5px);
+  animation:swing 3s infinite ease-in-out;
+}
+
+@keyframes swing{
+  0%{transform:rotate(-3deg)}
+  50%{transform:rotate(3deg)}
+  100%{transform:rotate(-3deg)}
+}
+
+.g {
+  transition: 1s all;
+}
+
+.mod-circle {
+  .g__col {
+    border-radius: 50%;
+  }
+}

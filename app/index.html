@@ -105,6 +105,13 @@
         You
       </button>
 
+      <button class="ui-nav-button" 
+              ng-class="{ active: currentView == 'mods'}" 
+              ng-click="switchView('mods')">
+        <i class="icon ion-beer"></i>
+        Mods
+      </button>
+
     </nav>
     <div class="ui-viewport" ng-include="currentTemplate">
     </div>
@@ -138,6 +145,22 @@
     <h1>You</h1>
     <figure class="ui-color-example" ng-style="{'background-color': user.color }"></figure>
     <strong>{{ user.name }}</strong>
+  </div>
+  </script>
+  <script type="text/ng-template" id="pgDashboard.mods">
+  <div class="ui-main">
+    <h1>Mods</h1>
+    <form>
+      <fieldset>
+      <legend>Visual Mods</legend>
+      <ul class="ui-mod-list">
+        <li ng-repeat="mod in mods.css" ng-click="toggleCssMod(mod.name)">
+          <input type="checkbox" ng-model="mod.enabled">
+          {{ mod.name }}
+        </li>
+      </ul>
+      </fieldset>
+    </form>
   </div>
   </script>
 </body>
