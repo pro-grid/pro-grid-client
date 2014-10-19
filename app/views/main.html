@@ -1,6 +1,32 @@
 <div class="loading" ng-if="!gridArray">
 </div>
-<div class="g">
+<div class="ui" ng-hide="uiClose">
+  <button class="ui-close" ng-click="uiClose = true">&times;</button>
+  <div class="ui-viewport">
+    <div class="ui-main">
+      <div class="ui-prose">
+        <h1>Welcome to ProGrid</h1>
+        <p>ProGrid is a live multiplayer pixel art game. Everything you draw is
+        broadcasted live to the other users on the site. Everything you draw is
+        saved forever...well until someone erases it.</p>
+      </div>
+    </div>
+    <div class="ui-widgets">
+      <div class="ui-widget">
+        <h2>Users Online</h2>
+        <strong class="ui-big-text">{{ meta.numUsers }}</strong>
+      </div>
+      <div class="ui-widget">
+        <h2>You</h2>
+        <figure class="ui-color-example" ng-style="{'background-color': user.color }"></figure>
+        <strong>{{ user.name }}</strong>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
+<div class="g" id="grid">
   <div class="g__row" ng-repeat="row in gridArray track by $index" ng-if="gridArray">
     <div  class="g__col col_{{ $parent.$index }}_{{ $index }}" 
           ng-style="{'background-color': col.color }"
