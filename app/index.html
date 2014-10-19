@@ -34,6 +34,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
@@ -80,6 +81,64 @@
     <script src="scripts/config.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/injectstyles.js"></script>
+    <script src="scripts/directives/pgdashboard.js"></script>
     <!-- endbuild -->
+
+
+  <script type="text/ng-template" id="pgDashboard">
+  <div class="ui" ng-hide="uiClose" ng-class="{ 'ng-reveal': menuOpen }" ng-if="gridArray">
+    <a href="#grid" class="ui-close" role="button" du-smooth-scroll ng-hide="menuOpen">&times;</a>
+    <button class="ui-menu-button" ng-click="toggleMenu()">
+      Menu&emsp;&emsp;<i class="icon ion-close"></i>
+    </button>
+    <nav class="ui-nav" ng-class="{ 'ng-reveal': menuOpen }">
+      <button class="ui-nav-button" 
+              ng-class="{ active: currentView == 'dashboard' }" 
+              ng-click="switchView('dashboard')">
+        <i class="icon ion-information-circled"></i>
+        Dashboard
+      </button>
+      <button class="ui-nav-button" 
+              ng-class="{ active: currentView == 'you'}" 
+              ng-click="switchView('you')">
+        <i class="icon ion-person"></i>
+        You
+      </button>
+
+    </nav>
+    <div class="ui-viewport" ng-include="currentTemplate">
+    </div>
+  </div>
+  </script>
+  <script type="text/ng-template" id="pgDashboard.dashboard">
+      <div class="ui-main">
+        <div class="ui-prose">
+          <h1>Welcome to ProGrid</h1>
+          <p>ProGrid is a live multiplayer pixel art game. Everything you draw is
+          broadcasted live to the other users on the site. Everything you draw is
+          saved forever...well until someone erases it.</p>
+          <p><a href="#grid" role="button" class="button" du-smooth-scroll>Start Clicking</a></p>
+        </div>
+      </div>
+      <div class="ui-widgets">
+        <div class="ui-widget">
+          <h2>Users Online</h2>
+          <strong class="ui-big-text">{{ meta.numUsers }}</strong>
+        </div>
+        <div class="ui-widget">
+          <h2>You</h2>
+          <figure class="ui-color-example--centered" ng-style="{'background-color': user.color }"></figure>
+          <strong>{{ user.name }}</strong>
+        </div>
+      </div>
+      </div>
+  </script>
+  <script type="text/ng-template" id="pgDashboard.you">
+  <div class="ui-main">
+    <h1>You</h1>
+    <figure class="ui-color-example" ng-style="{'background-color': user.color }"></figure>
+    <strong>{{ user.name }}</strong>
+  </div>
+  </script>
 </body>
 </html>

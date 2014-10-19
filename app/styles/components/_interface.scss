@@ -1,5 +1,6 @@
 %button {
   &, &:link, &:visited {
+    border: 0;
     transition: 0.2s all;
     background: $button-bg;
     text-decoration: none;
@@ -8,6 +9,9 @@
   }
   &:hover {
     background: saturate($button-bg, 20%);
+  }
+  &.active {
+    background: saturate($button-bg, 90%);
   }
 }
 

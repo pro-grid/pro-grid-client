@@ -1,28 +1,37 @@
 $medium-screen: 'only screen and (min-width: 40.063em)';
 
+$ui-padding: 2%;
+
+@function grid($num, $collapse: false) {
+  @if($collapse) {
+    $ui-padding: 0;
+  }
+  @return $num * 100% - ($ui-padding*2);
+}
+
 %two-thirds {
   @media #{$medium-screen} {
-    width: (2/3 * 100%);
+    width: grid(2/3);
     float: left;
   }
 }
 
 %one-third {
   @media #{$medium-screen} {
-    width: (1/3 * 100%);
+    width: grid(1/3);
     float: left;
   }
 }
 
 %one-half {
-  width: (1/2 * 100%);
+  width: grid(1/2, true);
   float: left;
 }
 
 .ui {
+  @extend %clearfix;
   background: #f1f1f1;
   overflow: hidden;
-  padding: 2%;
   position: relative;
   box-shadow: inset 0px -14px 18px -12px rgba(#1d1d1d,0.10);
 }
@@ -37,6 +46,8 @@ $medium-screen: 'only screen and (min-width: 40.063em)';
   background: none;
   border:none;
   padding: 0.5rem;
+  line-height: 1;
+  vertical-align: middle;
   &:link, &:visited {
     color: $button-bg;
     text-decoration: none;
@@ -53,12 +64,20 @@ $medium-screen: 'only screen and (min-width: 40.063em)';
 }
 
 .ui-main {
-
-  @extend %two-thirds;
+  @media #{$medium-screen} {
+    width: grid(1/2);
+    float:left;
+  }
+  padding: 2%;
 }
 
 .ui-widgets { 
-  @extend %one-third;
+  @extend %clearfix;
+  @media #{$medium-screen} {
+    width: grid(1/2);
+    float: left;
+  }
+  padding: 2%;
 }
 
 .ui-widget {
@@ -66,9 +85,94 @@ $medium-screen: 'only screen and (min-width: 40.063em)';
   @extend %one-half;
 }
 
-.ui-color-example {
+.ui-color-example--centered {
   width: 4em;
   height: 4em;
   margin: 0 auto;
   margin-bottom: 0.2em;
+}
+
+.ui-color-example {
+  width: 5em;
+  height: 5em;
+  margin: 0;
+  margin-bottom: 0.2em;
+}
+
+.ui-nav {
+  display: none;
+  background-color: darken($ui-accent, 20%);
+}
+
+.ui-nav-button {
+  @extend %button;
+  background: darken($ui-accent, 2%);
+  color: lighten($ui-accent, 40%);
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  outline: 0;
+  text-align: center;
+  .icon {
+    display:block;
+    font-size: 1.5em;
+  }
+  &.active {
+    color: #fff;
+  }
+}
+
+.ui-menu-button {
+  @extend %button;
+  margin: 0.5rem;
+
+  .icon:before {
+    transition: 0.2s all;
+    transform: rotate(45deg);
+    .ng-reveal & {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.ng-reveal {
+  display: block;
+}
+
+
+@media #{$medium-screen} {
+
+  $nav-width: 10em;
+
+  .ui-viewport {
+    @include clearfix;
+    transition: 0.1s all;
+    .ng-reveal & {
+      filter: blur(10px);
+      transform: scale(0.9);
+    }
+  }
+
+  .ui-nav-button {
+    display: inline-block;
+    width: 10em;
+  }
+
+  .ui-menu-button {
+    position: absolute;
+    .ng-reveal & {
+      z-index:2;
+    }
+  }
+
+  .ui-nav {
+    transition: 0.2s all;
+    background-color: darken($ui-accent, 10%);
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
 }
