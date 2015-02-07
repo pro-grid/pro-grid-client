@@ -4,7 +4,6 @@ progrid.io client
 
 [![code climate badge][]] [code climate]
 [![david badge][]][david]
-[![Gitter chat][gitter badge]][gitter]
 
 ![progrid.io][progrid gif]
 
